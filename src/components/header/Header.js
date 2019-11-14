@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { addTodo } from '../../actions';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -34,20 +36,14 @@ const Sort = styled.div`
     user-select: none;
 `
 
-const Header = (props) => {
-
-    const [name, setName] = useState(props.name);
-    useEffect(() => {
-        setName(props.name);
-    }, props.name)
-
+const Header = ({name, dispatch}) => {
     return (
         <Container>
             <Sort>Sort (А-я)</Sort>
             <Name>{name}</Name>
-            <Adder>Добавить задачу</Adder>
+            <Adder onClick={() => {dispatch(addTodo("name", "text", 1))}}>Добавить задачу</Adder>
         </Container>
     )
 }
 
-export default Header
+export default connect()(Header)

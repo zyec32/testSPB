@@ -1,7 +1,7 @@
 const BOARDS = [
   {
       id: 0,
-      name: 'first',
+      name: 'To Do',
       tasks: [
         {
           id: 0,
@@ -12,12 +12,12 @@ const BOARDS = [
   },
   {
       id: 1,
-      name: '2',
+      name: 'In process',
       tasks: []
   },
   {
       id: 2,
-      name: '3',
+      name: 'Done',
       tasks: []
   }
 ]
@@ -28,11 +28,14 @@ const boards = (state = BOARDS, {type, id, name, text, boardId}) => {
         return (
           state.map(board => (
             board.id == boardId ? 
-              [...board, {
-                id,
-                name,
-                text
-              }] :
+              {...board,
+                tasks: [
+                  ...board.tasks,{
+                    id,
+                    name,
+                    text
+                  }
+                ] } :
               board
           ))
         )
