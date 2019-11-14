@@ -36,7 +36,7 @@ const boards = (state = BOARDS, {type, id, name, text, boardId}) => {
       case 'ADD_TODO':
         return (
           state.map(board => (
-            board.id == boardId ? 
+            board.id === boardId ? 
               {
                 ...board,
                 tasks: [
@@ -59,7 +59,7 @@ const boards = (state = BOARDS, {type, id, name, text, boardId}) => {
       case 'SORT_TODO':
         return (
           state.map(board => (
-            board.id == boardId ? 
+            board.id === boardId ? 
               {
                 ...board,
                 sortBy: (board.sortBy+1)%2,
@@ -80,6 +80,24 @@ const boards = (state = BOARDS, {type, id, name, text, boardId}) => {
             ...board,
             tasks: board.tasks.map(task => (task.id === id) ? {...task, text} : task)
           }))
+        )
+      case 'MOVE_TODO':
+        var myTask;
+        state.map(board => (board.tasks.map(task => {
+          if (task.id === id) myTask = task;
+        })));
+        return (
+          state.map(board => ({
+            ...board,
+            tasks: board.tasks.filter(task => (task.id !== id))
+          })).map(board => (
+            board.id === boardId ?
+              {
+                ...board,
+                tasks: [...board.tasks, myTask].sort((a, b) => sort(a,b, board.sortBy))
+              } :
+              board
+          ))
         )
       default:
         return state

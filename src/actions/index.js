@@ -28,3 +28,9 @@ export const editTodoText = (id, text) => ({
   id,
   text,
 })
+
+export const moveTodo = (id, newBoardId) => ({
+  type: 'MOVE_TODO',
+  id,
+  boardId: newBoardId,
+})

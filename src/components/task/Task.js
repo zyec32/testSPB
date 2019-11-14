@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { deleteTodo, editTodoName, editTodoText } from '../../actions';
+import { deleteTodo, editTodoName, editTodoText, moveTodo } from '../../actions';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -28,22 +28,67 @@ const Delete = styled.span`
 `
 
 const Move = styled.span`
+    position: relative;
     color: #bdb9b9;
     font-size: 14px;
     cursor: pointer;
+    z-index: 100;
 `
 
-const Task = ({name, description, id, dispatch}) => {
+const DropDown = styled.div`
+    position: absolute;
+    top: 20;
+    left: 0;
+    min-width: 100px;
+    visibility: ${({isDown}) => isDown ? 'visible' : 'hidden'};
+    z-index: -101;
+`
+
+const DropItem = styled.div`
+    min-width: 100px;
+    height: 20px;
+    color: #000;
+`
+
+const Task = ({name, description, id, boardId, dispatch, boards}) => {
+
+    const [dropIsDown, setDropIsDown] = useState(false);
+
+    const nextBoards = boards.filter(board => (board.id !== boardId));
+
     return (
         <Container>
-            <Name suppressContentEditableWarning contentEditable onBlur={e => {dispatch(editTodoName(id, e.currentTarget.textContent))}}>{name}</Name>
-            <Description suppressContentEditableWarning contentEditable onBlur={e => {dispatch(editTodoText(id, e.currentTarget.textContent))}}>{description}</Description>
+            <Name 
+                suppressContentEditableWarning 
+                contentEditable 
+                onBlur={e => {dispatch(editTodoName(id, e.currentTarget.textContent))}}>
+                    {name}
+            </Name>
+            <Description 
+                suppressContentEditableWarning 
+                contentEditable 
+                onBlur={e => {dispatch(editTodoText(id, e.currentTarget.textContent))}}>
+                    {description}
+            </Description>
             <div>
                 <Delete onClick={() => {dispatch(deleteTodo(id))}}>Удалить</Delete>
-                <Move>Переместить ↓</Move>
+                <Move onMouseOver={() => setDropIsDown(true)} onMouseLeave={() => setDropIsDown(false)}  >Переместить ↓ 
+                    <DropDown isDown={dropIsDown}>
+                        {
+                            nextBoards.map(board => (
+                                <DropItem onClick={()=>dispatch(moveTodo(id, board.id))} key={board.id}>{board.name}</DropItem>
+                            ))
+                        }
+                    </DropDown>
+                </Move>
+                
             </div>
         </Container>
     )
 }
 
-export default connect()(Task)
+const mapStateToProps = state => ({
+    boards: state.boards
+})
+
+export default connect(mapStateToProps)(Task)
