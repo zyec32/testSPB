@@ -14,7 +14,7 @@ const List = (props) => {
     return (
         <Column>
             <Header name={props.name}/>
-            <Task />
+            <Task name="task" description="lorem"/>
         </Column>
     )
 }
