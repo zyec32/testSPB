@@ -50,7 +50,7 @@ const DropItem = styled.div`
     color: #000;
 `
 
-const Task = ({name, description, id, boardId, dispatch, boards}) => {
+const Task = ({name, description, id, boardId, dispatch, boards, isLocked}) => {
 
     const [dropIsDown, setDropIsDown] = useState(false);
 
@@ -60,13 +60,13 @@ const Task = ({name, description, id, boardId, dispatch, boards}) => {
         <Container>
             <Name 
                 suppressContentEditableWarning 
-                contentEditable 
+                contentEditable={!isLocked}
                 onBlur={e => {dispatch(editTodoName(id, e.currentTarget.textContent))}}>
                     {name}
             </Name>
             <Description 
                 suppressContentEditableWarning 
-                contentEditable 
+                contentEditable={!isLocked}
                 onBlur={e => {dispatch(editTodoText(id, e.currentTarget.textContent))}}>
                     {description}
             </Description>

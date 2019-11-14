@@ -34,12 +34,13 @@ const Sort = styled.div`
     color: #2DCD72;
     cursor: pointer;
     user-select: none;
+    visibility: ${({isLocked}) => isLocked ? 'hidden' : 'visible'};
 `
 
-const Header = ({name, dispatch, id}) => {
+const Header = ({name, dispatch, id, isLocked}) => {
     return (
         <Container>
-            <Sort onClick={() => {dispatch(sortTodo(id))}}>Sort (А-я)</Sort>
+            <Sort onClick={() => {dispatch(sortTodo(id))}} isLocked={isLocked}>Sort (А-я)</Sort>
             <Name>{name}</Name>
             <Adder onClick={() => {dispatch(addTodo("Сделать всю работу", "Нужно пойти на работу и попробовать закончить начатое", id))}}>Добавить задачу</Adder>
         </Container>
