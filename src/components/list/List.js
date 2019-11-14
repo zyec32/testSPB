@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux'
 import styled from 'styled-components';
 import Header from '../header';
 import Task from '../task';
@@ -10,19 +9,17 @@ const Column = styled.div`
     margin: 8px;
 `
 
-const List = (props) => {
-
-    
-
-
+const List = ({name, data}) => {
     return (
         <Column>
-            <Header name="6"/>
-            <Task name={props.tasks[0].text} description="lorem"/>
+            <Header name={name}/>
+            {
+                data.map(task => (
+                    <Task name={task.name} description={task.text}/>
+                ))
+            }
         </Column>
     )
 }
 
-export default connect(state => ({
-    tasks: state.todos,
-}))(List)
+export default List

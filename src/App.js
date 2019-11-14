@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import List from './components/list';
 
@@ -10,14 +11,20 @@ const Table = styled.div`
   background-color: #E5E5E6;
 `
 
-const App = () => {
+const App = ({boards}) => {
   return (
     <Table>
-      <List name="1"/>
-      <List name="1"/>
-      <List name="we"/>
+      {
+        boards.map(board => (
+          <List key={board.id} name={board.name} data={board.tasks}></List>
+        ))
+      }
     </Table>
   );
 }
 
-export default App;
+const mapStateToProps = state => ({
+  boards: state.boards
+})
+
+export default connect(mapStateToProps)(App);
