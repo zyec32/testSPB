@@ -41,7 +41,7 @@ const Header = ({name, dispatch, id}) => {
         <Container>
             <Sort>Sort (А-я)</Sort>
             <Name>{name}</Name>
-            <Adder onClick={() => {dispatch(addTodo("name", "text", id))}}>Добавить задачу</Adder>
+            <Adder onClick={() => {dispatch(addTodo("Сделать всю работу", "Нужно пойти на работу и попробовать закончить начатое", id))}}>Добавить задачу</Adder>
         </Container>
     )
 }

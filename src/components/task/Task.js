@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { deleteTodo } from '../../actions';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -29,17 +31,17 @@ const Move = styled.span`
     cursor: pointer;
 `
 
-const Task = (props) => {
+const Task = ({name, description, id, dispatch}) => {
     return (
         <Container>
-            <Name>{props.name}</Name>
-            <Description>{props.description}</Description>
+            <Name>{name}</Name>
+            <Description>{description}</Description>
             <div>
-                <Delete>Удалить</Delete>
+                <Delete onClick={() => {dispatch(deleteTodo(id))}}>Удалить</Delete>
                 <Move>Переместить ↓</Move>
             </div>
         </Container>
     )
 }
 
-export default Task
+export default connect()(Task)

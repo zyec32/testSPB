@@ -39,6 +39,13 @@ const boards = (state = BOARDS, {type, id, name, text, boardId}) => {
               board
           ))
         )
+      case 'DELETE_TODO':
+        return (
+          state.map(board => ({
+            ...board,
+            tasks: board.tasks.filter(task => (task.id !== id))
+          }))
+        )
       default:
         return state
     }

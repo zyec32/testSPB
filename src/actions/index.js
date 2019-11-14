@@ -6,3 +6,8 @@ export const addTodo = (name, text, boardId) => ({
   text,
   boardId,
 })
+
+export const deleteTodo = (id) => ({
+  type: 'DELETE_TODO',
+  id,
+})
