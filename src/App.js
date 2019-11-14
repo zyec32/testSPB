@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import List from './components/list';
 
 const Table = styled.div`
+  min-height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
   background-color: #E5E5E6;
-  justify-items: center;
 `
 
 const App = () => {
