@@ -16,7 +16,7 @@ const App = ({boards}) => {
     <Table>
       {
         boards.map(board => (
-          <List key={board.id} name={board.name} data={board.tasks}></List>
+          <List key={board.id} id={board.id} name={board.name} data={board.tasks}></List>
         ))
       }
     </Table>

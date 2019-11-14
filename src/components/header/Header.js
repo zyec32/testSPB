@@ -36,12 +36,12 @@ const Sort = styled.div`
     user-select: none;
 `
 
-const Header = ({name, dispatch}) => {
+const Header = ({name, dispatch, id}) => {
     return (
         <Container>
             <Sort>Sort (А-я)</Sort>
             <Name>{name}</Name>
-            <Adder onClick={() => {dispatch(addTodo("name", "text", 1))}}>Добавить задачу</Adder>
+            <Adder onClick={() => {dispatch(addTodo("name", "text", id))}}>Добавить задачу</Adder>
         </Container>
     )
 }

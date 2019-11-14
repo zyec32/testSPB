@@ -9,10 +9,10 @@ const Column = styled.div`
     margin: 8px;
 `
 
-const List = ({name, data}) => {
+const List = ({name, data, id}) => {
     return (
         <Column>
-            <Header name={name}/>
+            <Header name={name} id={id}/>
             {
                 data.map(task => (
                     <Task name={task.name} description={task.text}/>
