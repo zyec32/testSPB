@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Header from '../header';
 import Task from '../task';
+import { AST_PropAccess } from 'terser';
 
 const Column = styled.div`
     background-color: #F2F2F2;
@@ -9,10 +10,10 @@ const Column = styled.div`
     margin: 8px;
 `
 
-const List = () => {
+const List = (props) => {
     return (
         <Column>
-            <Header/>
+            <Header name={props.name}/>
             <Task />
         </Column>
     )

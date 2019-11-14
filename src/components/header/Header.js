@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -7,10 +7,20 @@ const Container = styled.div`
     border-top-right-radius: 8px;
 `
 
-const Header = () => {
+const Name = styled.div`
+
+`
+
+const Header = (props) => {
+
+    const [name, setName] = useState(props.name);
+    useEffect(() => {
+        setName(props.name);
+    }, props.name)
+
     return (
         <Container>
-            Pisos
+            <Name>{name}</Name>
         </Container>
     )
 }

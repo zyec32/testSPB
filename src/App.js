@@ -13,9 +13,9 @@ const Table = styled.div`
 const App = () => {
   return (
     <Table>
-      <List/>
-      <List/>
-      <List/>
+      <List name="1"/>
+      <List name="1"/>
+      <List name="we"/>
     </Table>
   );
 }
