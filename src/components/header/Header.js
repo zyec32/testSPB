@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { addTodo } from '../../actions';
+import { addTodo, sortTodo } from '../../actions';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -39,7 +39,7 @@ const Sort = styled.div`
 const Header = ({name, dispatch, id}) => {
     return (
         <Container>
-            <Sort>Sort (А-я)</Sort>
+            <Sort onClick={() => {dispatch(sortTodo(id))}}>Sort (А-я)</Sort>
             <Name>{name}</Name>
             <Adder onClick={() => {dispatch(addTodo("Сделать всю работу", "Нужно пойти на работу и попробовать закончить начатое", id))}}>Добавить задачу</Adder>
         </Container>

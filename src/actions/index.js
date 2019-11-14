@@ -11,3 +11,8 @@ export const deleteTodo = (id) => ({
   type: 'DELETE_TODO',
   id,
 })
+
+export const sortTodo = (boardId) => ({
+  type: 'SORT_TODO',
+  boardId,
+})
