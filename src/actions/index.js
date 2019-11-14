@@ -16,3 +16,15 @@ export const sortTodo = (boardId) => ({
   type: 'SORT_TODO',
   boardId,
 })
+
+export const editTodoName = (id, name) => ({
+  type: 'EDIT_TODO_NAME',
+  id,
+  name,
+})
+
+export const editTodoText = (id, text) => ({
+  type: 'EDIT_TODO_TEXT',
+  id,
+  text,
+})

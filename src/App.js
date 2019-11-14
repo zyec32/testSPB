@@ -6,7 +6,7 @@ import List from './components/list';
 const Table = styled.div`
   min-height: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 33% 33% 33%;
   grid-template-rows: auto;
   background-color: #E5E5E6;
 `

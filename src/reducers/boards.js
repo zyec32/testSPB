@@ -25,6 +25,12 @@ const BOARDS = [
   }
 ]
 
+const sort = (a, b, sortBy) => (
+  sortBy ? 
+    (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0) : 
+    (a.name < b.name) ? 1 : ((b.name < a.name) ? -1 : 0)
+)
+
 const boards = (state = BOARDS, {type, id, name, text, boardId}) => {
     switch (type) {
       case 'ADD_TODO':
@@ -39,7 +45,7 @@ const boards = (state = BOARDS, {type, id, name, text, boardId}) => {
                     name,
                     text
                   }
-                ].sort((a,b) => board.sortBy ? (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0) : (a.name < b.name) ? 1 : ((b.name < a.name) ? -1 : 0)) } :
+                ].sort((a, b) => sort(a,b, board.sortBy)) } :
               board
           ))
         )
@@ -56,10 +62,24 @@ const boards = (state = BOARDS, {type, id, name, text, boardId}) => {
             board.id == boardId ? 
               {
                 ...board,
-                sortBy: ++board.sortBy%2,
-                tasks: board.tasks.sort((a,b) => board.sortBy-1 ? (a.name < b.name) ? 1 : ((b.name < a.name) ? -1 : 0) : (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)) } :
+                sortBy: (board.sortBy+1)%2,
+                tasks: board.tasks.sort((b, a) => sort(a,b, board.sortBy)) } :
               board
           ))
+        )
+      case 'EDIT_TODO_NAME':
+        return (
+          state.map(board => ({
+            ...board,
+            tasks: board.tasks.map(task => (task.id === id) ? {...task, name} : task)
+          }))
+        )
+      case 'EDIT_TODO_TEXT':
+        return (
+          state.map(board => ({
+            ...board,
+            tasks: board.tasks.map(task => (task.id === id) ? {...task, text} : task)
+          }))
         )
       default:
         return state

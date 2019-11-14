@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteTodo } from '../../actions';
+import { deleteTodo, editTodoName, editTodoText } from '../../actions';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -12,10 +12,12 @@ const Container = styled.div`
 const Name = styled.div`
     font-weight: 900;
     font-size: 16px;
+    word-wrap: break-word;
 `
 
 const Description = styled.div`
     font-size: 14px;
+    word-wrap: break-word;
 `
 
 const Delete = styled.span`
@@ -34,8 +36,8 @@ const Move = styled.span`
 const Task = ({name, description, id, dispatch}) => {
     return (
         <Container>
-            <Name>{name}</Name>
-            <Description>{description}</Description>
+            <Name suppressContentEditableWarning contentEditable onBlur={e => {dispatch(editTodoName(id, e.currentTarget.textContent))}}>{name}</Name>
+            <Description suppressContentEditableWarning contentEditable onBlur={e => {dispatch(editTodoText(id, e.currentTarget.textContent))}}>{description}</Description>
             <div>
                 <Delete onClick={() => {dispatch(deleteTodo(id))}}>Удалить</Delete>
                 <Move>Переместить ↓</Move>

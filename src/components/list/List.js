@@ -15,7 +15,7 @@ const List = ({name, data, id}) => {
             <Header name={name} id={id}/>
             {
                 data.map(task => (
-                    <Task name={task.name} description={task.text} id={task.id}/>
+                    <Task key={task.id} name={task.name} description={task.text} id={task.id}/>
                 ))
             }
         </Column>
