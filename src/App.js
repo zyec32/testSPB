@@ -1,6 +1,6 @@
 import React from 'react';
-import List from './components/list';
 import styled from 'styled-components';
+import List from './components/list';
 
 const Table = styled.div`
   display: grid;
